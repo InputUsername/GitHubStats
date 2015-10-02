@@ -29,10 +29,22 @@ function userView(username) {
 				+ "</a>";
 			$("#userView_title").html(title);
 
-			var basicInfo = "Name: " + info.name + " | "
-				+ "Location: " + info.location + " | "
-				+ "User ID: " + info.id;
-			$("#userView_basicInfo").html(basicInfo);
+			var infos = [
+				(info.name !== null ? "Name: " + info.name : null),
+				(info.location !== null ? "Location: " + info.location : null),
+				(info.id !== null ? "User ID: " + info.id : null)
+			];
+
+			var $basicInfo = $("#userView_basicInfo");
+
+			var p;
+			infos.forEach(function(info) {
+				if (info != null) {
+					p = document.createElement("p");
+					p.innerHTML = info;
+					$basicInfo.append(p);
+				}
+			});
 		}
 	};
 
