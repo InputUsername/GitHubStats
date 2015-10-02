@@ -63,9 +63,9 @@ function repoView(username, repo) {
 
 function main() {
 	// Load correct view
-	var query = window.location.hash.substring(2);
-
 	var currentView;
+
+	var query = window.location.hash.substring(2);
 
 	var parts = query.split("/");
 	var username = parts[0];
