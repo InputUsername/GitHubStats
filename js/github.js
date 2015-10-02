@@ -26,6 +26,10 @@ function apiRequest(url, callback) {
         return;
     }
 
+    if (!url.endsWith("?callback=callbackWrapper")) {
+        url += "?callback=callbackWrapper";
+    }
+
     userCallback = callback;
 
     scriptElement = document.createElement("script");
