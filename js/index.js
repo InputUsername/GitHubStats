@@ -1,5 +1,32 @@
-function main() {
+function normalView() {
+	var showUser = function() {
+		var usernameInput = $("#usernameInput").val();
 
+		if (usernameInput !== "") {
+			window.location.hash = "#/" + usernameInput;
+			window.location.reload();
+		}
+	};
+
+	// "Show stats"
+	$("#getStats").on("click", function() {
+		showUser();
+	});
+}
+
+function userView(username) {
+	$("#userViewTitle").html("GitHub statistics for " + username);
+
+	var reposListCallback = function(data) {
+		
+	};
+}
+
+function repoView(username, repo) {
+	$("#repoField").html(repo);
+}
+
+function main() {
 	// Load correct view
 	var query = window.location.hash.substring(2);
 
@@ -29,23 +56,14 @@ function main() {
 	}
 
 	if (currentView === "normal") {
-		// "Show stats"
-		$("#getStats").click(function() {
-			var usernameInput = $("#usernameInput").val();
-
-			if (usernameInput !== "") {
-				window.location.hash = "#/" + usernameInput;
-				window.location.reload();
-			}
-		});
+		normalView();
 	}
 	else if (currentView === "user") {
-		$("#userViewTitle").html("GitHub statistics for " + username);
+		userView(username);
 	}
 	else if (currentView === "repo") {
-		$("#repoField").html(repo);
+		repoView(username, repo);
 	}
-
 };
 
 $(document).ready(function() {
