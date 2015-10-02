@@ -66,3 +66,9 @@ input[type="button"]:hover {
 
     cursor: pointer;
 }
+
+/* User view */
+#userView_image {
+    width: 150px;
+    height: 150px;
+}

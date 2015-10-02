@@ -17,9 +17,33 @@ function normalView() {
 function userView(username) {
 	$("#userViewTitle").html("GitHub statistics for " + username);
 
+	var generalInfoCallback = function(data) {
+		if (data.data) {
+			var info = data.data;
+
+			$("#userView_image").attr("src", info.avatar_url);
+		}
+	}
+
+	apiRequest("https://api.github.com/users/" + username, generalInfoCallback);
+
+	/*
 	var reposListCallback = function(data) {
-		
+		if (data.data) {
+			var repos = data.data;
+
+			// No jQuery because lazy + 1337 h4xx
+			var $reposList = document.getElementById("userView_repos");
+
+			var li;
+			repos.forEach(function(repo) {
+				li = document.createElement("li");
+				li.innerHTML = repo.name;
+				$reposList.appendChild(li);
+			});
+		}
 	};
+	*/
 }
 
 function repoView(username, repo) {
