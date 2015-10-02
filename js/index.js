@@ -56,13 +56,13 @@ function userView(username) {
 			var repos = data.data;
 
 			// No jQuery because lazy + 1337 h4xx
-			var $reposList = document.getElementById("userView_repos");
+			var $reposList = $("userView_repos");
 
 			var li;
 			repos.forEach(function(repo) {
 				li = document.createElement("li");
 				li.innerHTML = repo.name;
-				$reposList.appendChild(li);
+				$reposList.append(li);
 			});
 		}
 	};
