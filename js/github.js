@@ -30,8 +30,10 @@ function apiRequest(url, callback) {
         url += "?callback=callbackWrapper";
     }
 
+    // Set the user callback function that will be called from callbackWrapper()
     userCallback = callback;
 
+    // Load the API data via a <script>
     scriptElement = document.createElement("script");
     scriptElement.src = url;
     document.body.appendChild(scriptElement);
