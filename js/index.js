@@ -77,7 +77,15 @@ function main() {
 	// Load correct view
 	var currentView;
 
-	var query = window.location.hash.substring(2);
+	var query = "";
+	var hash = window.location.hash;
+
+	if (hash.startsWith("#/")) {
+		query = window.location.hash.substring(2);
+	}
+	else {
+		window.location.hash = "";
+	}
 
 	var parts = query.split("/");
 	var username = parts[0];
