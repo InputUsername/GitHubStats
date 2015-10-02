@@ -67,48 +67,6 @@ input[type="button"]:hover {
     cursor: pointer;
 }
 
-/* Modal */
-.modal {
-    position: fixed;
-
-    top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-
-	background: rgba(0, 0, 0, 0.7);
-
-    z-index: 99999;
-
-    opacity: 0;
-
-    -webkit-transition: opacity 0.25s ease-in;
-	-moz-transition: opacity 0.25s ease-in;
-	transition: opacity 0.25s ease-in;
-
-	pointer-events: none;
-}
-
-.modal:target {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-.modalContent {
-    background-color: #ffffff;
-
-    width: 70%;
-    height: auto;
-
-    margin: 12.5% auto;
-    padding: 5%;
-}
-
-/* "Not working" modal */
-#notworking h2 {
-    margin-top: 0;
-}
-
 /* User view */
 #userView_image {
     width: 150px;
