@@ -22,8 +22,14 @@ function userView(username) {
 			var info = data.data;
 
 			$("#userView_image").attr("src", info.avatar_url);
+
+			var title = "GitHub statistics for "
+				+ "<a href=\"" + info.html_url + "\">"
+				+ username
+				+ "</a>";
+			$("#userView_title").html(title);
 		}
-	}
+	};
 
 	apiRequest("https://api.github.com/users/" + username, generalInfoCallback);
 
