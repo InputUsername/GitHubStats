@@ -97,11 +97,16 @@ input[type="button"]:hover {
 .modalContent {
     background-color: #ffffff;
 
-    width: 50%;
+    width: 70%;
     height: auto;
 
     margin: 12.5% auto;
-    padding: 1em;
+    padding: 5%;
+}
+
+/* "Not working" modal */
+#notworking h2 {
+    margin-top: 0;
 }
 
 /* User view */
