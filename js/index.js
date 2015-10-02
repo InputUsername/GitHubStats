@@ -28,6 +28,11 @@ function userView(username) {
 				+ username
 				+ "</a>";
 			$("#userView_title").html(title);
+
+			var basicInfo = "Name: " + info.name + " | "
+				+ "Location: " + info.location + " | "
+				+ "User ID: " + info.id;
+			$("#userView_basicInfo").html(basicInfo);
 		}
 	};
 
