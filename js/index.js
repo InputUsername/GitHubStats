@@ -4,7 +4,6 @@ function normalView() {
 
 		if (usernameInput !== "") {
 			window.location.hash = "#/" + usernameInput;
-			window.location.reload();
 		}
 	};
 
@@ -57,10 +56,13 @@ function userView(username) {
 			// No jQuery because lazy + 1337 h4xx
 			var $reposList = document.getElementById("userView_repos");
 
-			var li;
+			var li, a;
 			repos.forEach(function(repo) {
 				li = document.createElement("li");
-				li.innerHTML = repo.name;
+				a = document.createElement("a");
+				a.href = "#/" + username + "/" + repo.name;
+				a.innerHTML = repo.name;
+				li.append(a);
 				$reposList.append(li);
 			});
 		}
@@ -83,7 +85,7 @@ function main() {
 	if (hash.startsWith("#/")) {
 		query = window.location.hash.substring(2);
 	}
-	else {
+	else if (window.location.hash != "") {
 		window.location.hash = "";
 	}
 
@@ -91,23 +93,22 @@ function main() {
 	var username = parts[0];
 	var repo = parts[1];
 
+	$("#normalView, #userView, #repoView").hide();
+
 	if (repo) {
 		currentView = "repo";
 
-		$("#normalView").hide();
-		$("#userView").hide();
+		$("#repoView").show();
 	}
 	else if (username) {
 		currentView = "user";
 
-		$("#normalView").hide();
-		$("#repoView").hide();
+		$("#userView").show();
 	}
 	else {
 		currentView = "normal";
 
-		$("#userView").hide();
-		$("#repoView").hide();
+		$("#normalView").show();
 	}
 
 	if (currentView === "normal") {
@@ -124,3 +125,5 @@ function main() {
 $(document).ready(function() {
 	main();
 });
+
+window.onhashchange = main;
