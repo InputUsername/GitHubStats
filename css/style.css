@@ -34,6 +34,11 @@ h2 {
     font-weight: 700;
 }
 
+h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
 input[type="text"] {
     outline: none;
     border: none;
@@ -67,8 +72,22 @@ input[type="button"]:hover {
     cursor: pointer;
 }
 
+#wrapper {
+    padding: 5%;
+}
+
 /* User view */
 #userView_image {
     width: 150px;
     height: 150px;
+}
+
+#userView_basicInfo p {
+    margin: 0;
+}
+
+#userView_repos {
+    padding: 0;
+
+    list-style-type: none;
 }
