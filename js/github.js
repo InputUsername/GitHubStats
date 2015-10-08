@@ -1,40 +1,34 @@
-// The callback function that will be called when the API data has been loaded through the script element
-var userCallback = null;
-
-// The script element that will be added to the DOM to load GitHub API data
-var scriptElement = null;
-
-// Wrapper function, removes script element from DOM and calls user callback
-// This function will be used for JSONP
-function callbackWrapper(data) {
-    // Call user callback and set it to null again
-    if (userCallback != null) {
-        userCallback(data);
-        userCallback = null;
-    }
-
-    // Remove script element
-    if (scriptElement != null) {
-        document.body.removeChild(scriptElement);
-        scriptElement = null;
-    }
-}
+var userCallbacks = {};
+var scriptElements = {};
 
 // Perform an API request
-function apiRequest(url, callback) {
-    if (scriptElement != null || userCallback != null) {
+function apiRequest(url, id, callback) {
+    if (id.match(/[^A-Za-z_]/)) {
         return;
     }
 
-    if (!url.endsWith("?callback=callbackWrapper")) {
-        url += "?callback=callbackWrapper";
+    if (userCallbacks[id] || scriptElements[id]) {
+        return;
     }
 
-    // Set the user callback function that will be called from callbackWrapper()
-    userCallback = callback;
+    if (!url.endsWith("?callback=")) {
+        url += "?callback=userCallbacks." + id;
+    }
 
-    // Load the API data via a <script>
-    scriptElement = document.createElement("script");
-    scriptElement.src = url;
-    document.body.appendChild(scriptElement);
+    scriptElements[id] = document.createElement("script");
+    scriptElements[id].id = "gh_" + id;
+    scriptElements[id].src = url;
+    document.body.appendChild(scriptElements[id]);
+
+    userCallbacks[id] = function(data) {
+        callback(data);
+
+        if (userCallbacks[id]) {
+            delete userCallbacks[id];
+        }
+        if (scriptElements[id]) {
+            var scriptElem = document.getElementById("gh_" + id);
+            document.body.removeChild(scriptElem);
+        }
+    };
 }
