@@ -48,15 +48,14 @@ function userView(username) {
 		}
 	};
 
-	apiRequest("https://api.github.com/users/" + username, generalInfoCallback);
+	apiRequest("https://api.github.com/users/" + username, "generalInfo", generalInfoCallback);
 
-	/*
 	var reposListCallback = function(data) {
 		if (data.data) {
 			var repos = data.data;
 
 			// No jQuery because lazy + 1337 h4xx
-			var $reposList = $("userView_repos");
+			var $reposList = document.getElementById("userView_repos");
 
 			var li;
 			repos.forEach(function(repo) {
@@ -66,7 +65,8 @@ function userView(username) {
 			});
 		}
 	};
-	*/
+
+	apiRequest("https://api.github.com/users/" + username + "/repos", "reposList", reposListCallback);
 }
 
 function repoView(username, repo) {
