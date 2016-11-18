@@ -101,18 +101,12 @@ function repoView(username, repoName) {
 		if (data.data) {
 			var repo = data.data;
 
-			var userLink = $("<a></a>")
-				.attr("href", repo.owner.html_url)
-				.html(repo.owner.login);
-
 			var repoLink = $("<a></a>")
 				.attr("href", repo.html_url)
-				.html(repo.name);
+				.html(repo.full_name);
 
 			$("#repoView_title")
 				.html("Repo statistics for ")
-				.append(userLink)
-				.append("/")
 				.append(repoLink);
 
 			$pLink = $("#repoView_permaLink");
