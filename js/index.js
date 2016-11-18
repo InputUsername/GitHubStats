@@ -2,8 +2,9 @@ function getUserLink(username) {
 	return "#/" + username;
 }
 
-function getRepoLink(username, repo) {
-	return getUserLink(username) + "/" + repo;
+function getRepoLink(username, repoName) {
+	return getUserLink(username) + "/" + repoName;
+}
 }
 
 function normalView() {
@@ -88,7 +89,7 @@ function userView(username) {
 	apiRequest(API_URL + "users/" + username + "/repos", "reposList", reposListCallback);
 }
 
-function repoView(username, repo) {
+function repoView(username, repoName) {
 
 }
 
@@ -108,11 +109,11 @@ function main() {
 
 	var parts = query.split("/");
 	var username = parts[0];
-	var repo = parts[1];
+	var repoName = parts[1];
 
 	$("#normalView, #userView, #repoView").hide();
 
-	if (repo) {
+	if (repoName) {
 		currentView = "repo";
 
 		$("#repoView").show();
@@ -135,7 +136,7 @@ function main() {
 		userView(username);
 	}
 	else if (currentView === "repo") {
-		repoView(username, repo);
+		repoView(username, repoName);
 	}
 };
 
