@@ -81,7 +81,9 @@ input[type="button"]:hover {
     background-color: #cfd8dc; /* blue grey 100 */
     
     padding: 2%;
-    margin: 0 -7% 2% -7%;
+    margin-top: 0;
+    margin-left: -7%;
+    margin-right: -7%;
 }
 
 /* User view */
