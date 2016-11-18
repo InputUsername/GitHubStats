@@ -14,8 +14,6 @@ function normalView() {
 }
 
 function userView(username) {
-	$("#userViewTitle").html("GitHub statistics for " + username);
-
 	var generalInfoCallback = function(data) {
 		if (data.data) {
 			var info = data.data;
