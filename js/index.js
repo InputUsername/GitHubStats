@@ -1,3 +1,11 @@
+function getUserLink(username) {
+	return "#/" + username;
+}
+
+function getRepoLink(username, repo) {
+	return getUserLink(username) + "/" + repo;
+}
+
 function normalView() {
 	var showUser = function() {
 		var usernameInput = $("#usernameInput").val();
