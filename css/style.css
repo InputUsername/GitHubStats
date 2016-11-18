@@ -2,6 +2,9 @@
     font-family: "Open Sans", sans-serif;
     font-size: 18px;
     font-weight: 400;
+
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -9,6 +12,14 @@ body {
     padding: 0;
 
     text-align: center;
+}
+
+div {
+    margin: 1em;
+}
+
+p {
+    margin: 0.5em;
 }
 
 a {
@@ -27,16 +38,22 @@ a:hover {
 h1 {
     font-size: 24px;
     font-weight: 700;
+
+    margin: 0.5em;
 }
 
 h2 {
     font-size: 20px;
     font-weight: 700;
+
+    margin: 0.5em;
 }
 
 h3 {
     font-size: 18px;
     font-weight: 700;
+
+    margin: 0.5em;
 }
 
 input[type="text"] {
@@ -73,19 +90,21 @@ input[type="button"]:hover {
 }
 
 #wrapper {
-    padding: 5%;
-    padding-top: 0;
+    margin: 0;
+    padding: 0;
 }
 
 /*** Heading ***/
 
 #heading {
     background-color: #cfd8dc; /* blue grey 100 */
-    
-    padding: 2%;
-    margin-top: 0;
-    margin-left: -7%;
-    margin-right: -7%;
+
+    padding: 20px;
+    margin: 0;
+}
+
+#heading h1 {
+    margin: 0;
 }
 
 /*** User view ***/
