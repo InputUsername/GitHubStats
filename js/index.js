@@ -28,13 +28,19 @@ function userView(username) {
 
 			$("#userView_image").attr("src", info.avatar_url);
 
-			var a = $("<a></a>")
+			var ghLink = $("<a></a>")
 				.attr("href", info.html_url)
 				.html(username);
 
 			$("#userView_title")
 				.html("GitHub statistics for ")
-				.append(a);
+				.append(ghLink);
+
+			var permaLink = $("<a></a>")
+				.attr("href", window.location.href)
+				.html("Permalink");
+
+			$("#userView_permaLink").append(permaLink);
 
 			var infos = [
 				{"title": "Name", "value": info.name},
