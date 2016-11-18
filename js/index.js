@@ -28,25 +28,29 @@ function userView(username) {
 
 			$("#userView_image").attr("src", info.avatar_url);
 
-			var title = "GitHub statistics for "
-				+ "<a href=\"" + info.html_url + "\">"
-				+ username
-				+ "</a>";
-			$("#userView_title").html(title);
+			var a = $("<a></a>")
+				.attr("href", info.html_url)
+				.html(username);
+
+			$("#userView_title")
+				.html("GitHub statistics for ")
+				.append(a);
 
 			var infos = [
-				(info.name !== null ? "Name: " + info.name : null),
-				(info.location !== null ? "Location: " + info.location : null),
-				(info.id !== null ? "User ID: " + info.id : null)
+				{"title": "Name", "value": info.name},
+				{"title": "Location", "value": info.location},
+				{"title": "User ID", "value": info.id},
+				{"title": "Following", "value": info.following},
+				{"title": "Followers", "value": info.followers}
 			];
 
 			var $basicInfo = $("#userView_basicInfo");
 
 			var p;
-			infos.forEach(function(info) {
-				if (info != null) {
-					p = document.createElement("p");
-					p.innerHTML = info;
+			infos.forEach(function(item) {
+				if (item.value !== null) {
+					p = $("<p></p>")
+						.html(item.title + ": " + item.value);
 					$basicInfo.append(p);
 				}
 			});
@@ -59,16 +63,17 @@ function userView(username) {
 		if (data.data) {
 			var repos = data.data;
 
-			// No jQuery because lazy + 1337 h4xx
-			var $reposList = document.getElementById("userView_repos");
+			var $reposList = $("#userView_repos");
 
 			var li, a;
 			repos.forEach(function(repo) {
-				li = document.createElement("li");
-				a = document.createElement("a");
-				a.href = "#/" + username + "/" + repo.name;
-				a.innerHTML = repo.name;
-				li.append(a);
+				a = $("<a></a>")
+					.attr("href", getRepoLink(username, repo.name))
+					.html(repo.name);
+
+				li = $("<li></li>")
+					.append(a);
+
 				$reposList.append(li);
 			});
 		}
@@ -78,7 +83,7 @@ function userView(username) {
 }
 
 function repoView(username, repo) {
-	$("#repoField_title").html(repo);
+
 }
 
 function main() {
