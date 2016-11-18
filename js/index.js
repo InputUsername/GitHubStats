@@ -19,7 +19,7 @@ function normalView() {
 		var usernameInput = $("#usernameInput").val();
 
 		if (usernameInput !== "") {
-			window.location.hash = "#/" + usernameInput;
+			window.location.hash = getUserLink(usernameInput);
 		}
 	};
 
@@ -38,7 +38,7 @@ function userView(username) {
 
 			var ghLink = $("<a></a>")
 				.attr("href", info.html_url)
-				.html(username);
+				.html(info.login);
 
 			$("#userView_title")
 				.html("GitHub statistics for ")
@@ -97,7 +97,33 @@ function userView(username) {
 }
 
 function repoView(username, repoName) {
+	var repoInfoCallback = function(data) {
+		if (data.data) {
+			var repo = data.data;
 
+			var userLink = $("<a></a>")
+				.attr("href", repo.owner.html_url)
+				.html(repo.owner.login);
+
+			var repoLink = $("<a></a>")
+				.attr("href", repo.html_url)
+				.html(repo.name);
+
+			$("#repoView_title")
+				.html("Repo statistics for ")
+				.append(userLink)
+				.append("/")
+				.append(repoLink);
+
+			$pLink = $("#repoView_permaLink");
+
+			if ($pLink.html() === "") {
+				createPermaLink($pLink);
+			}
+		}
+	};
+
+	apiRequest(API_URL + "repos/" + username + "/" + repoName, "repoInfo", repoInfoCallback);
 }
 
 function main() {
