@@ -72,7 +72,7 @@ function userView(username) {
 }
 
 function repoView(username, repo) {
-	$("#repoField").html(repo);
+	$("#repoField_title").html(repo);
 }
 
 function main() {
