@@ -74,6 +74,13 @@ input[type="button"]:hover {
 
 #wrapper {
     padding: 5%;
+    padding-top: 0;
+}
+
+#heading {
+    background-color: #90a4ae; /* blue grey 300 */
+    
+    padding: 2%;
 }
 
 /* User view */
