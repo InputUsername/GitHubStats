@@ -77,6 +77,8 @@ input[type="button"]:hover {
     padding-top: 0;
 }
 
+/*** Heading ***/
+
 #heading {
     background-color: #cfd8dc; /* blue grey 100 */
     
@@ -86,7 +88,8 @@ input[type="button"]:hover {
     margin-right: -7%;
 }
 
-/* User view */
+/*** User view ***/
+
 #userView_image {
     width: 150px;
     height: 150px;
