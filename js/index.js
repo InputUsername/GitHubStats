@@ -57,7 +57,7 @@ function userView(username) {
 		}
 	};
 
-	apiRequest("https://api.github.com/users/" + username, "generalInfo", generalInfoCallback);
+	apiRequest(API_URL + "users/" + username, "generalInfo", generalInfoCallback);
 
 	var reposListCallback = function(data) {
 		if (data.data) {
@@ -79,7 +79,7 @@ function userView(username) {
 		}
 	};
 
-	apiRequest("https://api.github.com/users/" + username + "/repos", "reposList", reposListCallback);
+	apiRequest(API_URL + "users/" + username + "/repos", "reposList", reposListCallback);
 }
 
 function repoView(username, repo) {
