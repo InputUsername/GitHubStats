@@ -1,9 +1,25 @@
+function getUserLink(username) {
+	return "#/" + username;
+}
+
+function getRepoLink(username, repoName) {
+	return getUserLink(username) + "/" + repoName;
+}
+
+function createPermaLink(elem) {
+	var permaLink = $("<a></a>")
+		.attr("href", window.location.href)
+		.html("Permalink");
+
+	elem.append(permaLink);
+}
+
 function normalView() {
 	var showUser = function() {
 		var usernameInput = $("#usernameInput").val();
 
 		if (usernameInput !== "") {
-			window.location.hash = "#/" + usernameInput;
+			window.location.hash = getUserLink(usernameInput);
 		}
 	};
 
@@ -20,57 +36,88 @@ function userView(username) {
 
 			$("#userView_image").attr("src", info.avatar_url);
 
-			var title = "GitHub statistics for "
-				+ "<a href=\"" + info.html_url + "\">"
-				+ username
-				+ "</a>";
-			$("#userView_title").html(title);
+			var ghLink = $("<a></a>")
+				.attr("href", info.html_url)
+				.html(info.login);
+
+			$("#userView_title")
+				.html("GitHub statistics for ")
+				.append(ghLink);
+
+			$pLink = $("#userView_permaLink");
+
+			if ($pLink.html() === "") {
+				createPermaLink($pLink);
+			}
 
 			var infos = [
-				(info.name !== null ? "Name: " + info.name : null),
-				(info.location !== null ? "Location: " + info.location : null),
-				(info.id !== null ? "User ID: " + info.id : null)
+				{"title": "Name", "value": info.name},
+				{"title": "Location", "value": info.location},
+				{"title": "User ID", "value": info.id},
+				{"title": "Following", "value": info.following},
+				{"title": "Followers", "value": info.followers}
 			];
 
 			var $basicInfo = $("#userView_basicInfo");
 
 			var p;
-			infos.forEach(function(info) {
-				if (info != null) {
-					p = document.createElement("p");
-					p.innerHTML = info;
+			infos.forEach(function(item) {
+				if (item.value !== null) {
+					p = $("<p></p>")
+						.html(item.title + ": " + item.value);
 					$basicInfo.append(p);
 				}
 			});
 		}
 	};
 
-	apiRequest("https://api.github.com/users/" + username, "generalInfo", generalInfoCallback);
+	apiRequest(API_URL + "users/" + username, "generalInfo", generalInfoCallback);
 
 	var reposListCallback = function(data) {
 		if (data.data) {
 			var repos = data.data;
 
-			// No jQuery because lazy + 1337 h4xx
-			var $reposList = document.getElementById("userView_repos");
+			var $reposList = $("#userView_repos");
 
 			var li, a;
 			repos.forEach(function(repo) {
-				li = document.createElement("li");
-				a = document.createElement("a");
-				a.href = "#/" + username + "/" + repo.name;
-				a.innerHTML = repo.name;
-				li.append(a);
+				a = $("<a></a>")
+					.attr("href", getRepoLink(username, repo.name))
+					.html(repo.name);
+
+				li = $("<li></li>")
+					.append(a);
+
 				$reposList.append(li);
 			});
 		}
 	};
 
-	apiRequest("https://api.github.com/users/" + username + "/repos", "reposList", reposListCallback);
+	apiRequest(API_URL + "users/" + username + "/repos", "reposList", reposListCallback);
 }
 
-function repoView(username, repo) {
-	$("#repoField_title").html(repo);
+function repoView(username, repoName) {
+	var repoInfoCallback = function(data) {
+		if (data.data) {
+			var repo = data.data;
+
+			var repoLink = $("<a></a>")
+				.attr("href", repo.html_url)
+				.html(repo.full_name);
+
+			$("#repoView_title")
+				.html("Repo statistics for ")
+				.append(repoLink);
+
+			$pLink = $("#repoView_permaLink");
+
+			if ($pLink.html() === "") {
+				createPermaLink($pLink);
+			}
+		}
+	};
+
+	apiRequest(API_URL + "repos/" + username + "/" + repoName, "repoInfo", repoInfoCallback);
 }
 
 function main() {
@@ -89,11 +136,11 @@ function main() {
 
 	var parts = query.split("/");
 	var username = parts[0];
-	var repo = parts[1];
+	var repoName = parts[1];
 
 	$("#normalView, #userView, #repoView").hide();
 
-	if (repo) {
+	if (repoName) {
 		currentView = "repo";
 
 		$("#repoView").show();
@@ -116,7 +163,7 @@ function main() {
 		userView(username);
 	}
 	else if (currentView === "repo") {
-		repoView(username, repo);
+		repoView(username, repoName);
 	}
 };
 

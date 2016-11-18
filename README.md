@@ -1,7 +1,2 @@
 # GitHubStats
-GitHub statistics and stuff.
-
-I'll eventually make a website or something where you can check your GitHub stats.
-Kinda like http://osrc.dfm.io used to be.
-
-~~TODO: start~~
+A work-in-progress GitHub statistics tool, inspired by the (now gone) OSRC (http://osrc.dfm.io).

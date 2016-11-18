@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GitHubStats</title>
+	<title>GitHubStats</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" type="text/css">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-    <div id="wrapper">
-        <h1><a href="/">GitHubStats</a> - check your GitHub statistics!</h1>
+	<div id="wrapper">
+		<div id="heading">
+			<h1><a href="#">GitHubStats</a> - check your GitHub statistics!</h1>
+		</div>
 
-        <div id="normalView">
-            <p>Not working yet.</p>
+		<div id="normalView">
+			<p>Not working yet.</p>
 
-            <input id="usernameInput" type="text" value="" placeholder="Username">
+			<input id="usernameInput" type="text" value="" placeholder="Username">
 
-            <input id="getStats" type="button" value="Get statistics!">
-        </div>
+			<input id="getStats" type="button" value="Get statistics!">
+		</div>
 
-        <div id="userView">
-            <img id="userView_image" src="" alt="Avatar">
+		<div id="userView">
+			<h2 id="userView_title"></h2>
 
-            <h2 id="userView_title"></h2>
+			<p id="userView_permaLink"></p>
 
-            <div id="userView_basicInfo"></div>
+			<img id="userView_image" src="" alt="Avatar">
 
-            <h3>Repositories</h3>
-            <ul id="userView_repos"></ul>
-        </div>
+			<div id="userView_basicInfo"></div>
 
-        <did id="repoView">
-            <h2 id="repoView_title"></h2>
-        </div>
-    </div>
+			<h3>Repositories</h3>
+			<ul id="userView_repos"></ul>
+		</div>
 
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
-    <script src="js/github.js" type="text/javascript"></script>
-    <script src="js/index.js" type="text/javascript"></script>
+		<did id="repoView">
+			<h2 id="repoView_title"></h2>
+
+			<p id="repoView_permaLink"></p>
+		</div>
+	</div>
+
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"></script>
+	<script src="js/github.js" type="text/javascript"></script>
+	<script src="js/index.js" type="text/javascript"></script>
 </body>
 </html>

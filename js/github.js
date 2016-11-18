@@ -1,3 +1,5 @@
+var API_URL = "https://api.github.com/";
+
 var userCallbacks = {};
 var scriptElements = {};
 
