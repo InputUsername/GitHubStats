@@ -5,6 +5,13 @@ function getUserLink(username) {
 function getRepoLink(username, repoName) {
 	return getUserLink(username) + "/" + repoName;
 }
+
+function createPermaLink(elem) {
+	var permaLink = $("<a></a>")
+		.attr("href", window.location.href)
+		.html("Permalink");
+
+	elem.append(permaLink);
 }
 
 function normalView() {
@@ -37,11 +44,11 @@ function userView(username) {
 				.html("GitHub statistics for ")
 				.append(ghLink);
 
-			var permaLink = $("<a></a>")
-				.attr("href", window.location.href)
-				.html("Permalink");
+			$pLink = $("#userView_permaLink");
 
-			$("#userView_permaLink").append(permaLink);
+			if ($pLink.html() === "") {
+				createPermaLink($pLink);
+			}
 
 			var infos = [
 				{"title": "Name", "value": info.name},
