@@ -27,6 +27,13 @@ function normalView() {
 	$("#getStats").on("click", function() {
 		showUser();
 	});
+	
+	$("#usernameInput").keypress(function(e) {
+		if (e.which == 13) {
+			showUser();
+			return false;
+		}
+	});
 }
 
 function userView(username) {
