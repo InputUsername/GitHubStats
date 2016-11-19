@@ -31,6 +31,8 @@ function apiRequest(url, id, callback) {
         if (scriptElements[id]) {
             var scriptElem = document.getElementById("gh_" + id);
             document.body.removeChild(scriptElem);
+            
+            delete scriptElements[id];
         }
     };
 }
